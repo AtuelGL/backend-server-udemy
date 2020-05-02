@@ -1,0 +1,1 @@
+module.exports.SEED = 'that@-is@a-difficult@token!';
