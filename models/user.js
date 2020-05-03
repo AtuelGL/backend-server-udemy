@@ -16,6 +16,7 @@ var userSchema = new Schema({
     passwd: { type: String, required: [true, 'La contraseña es necesariao'] },
     img: { type: String },
     role: { type: String, required: true, default: 'USER_ROLE', enum: validRoles },
+    google: { type: Boolean, default: false }
 });
 
 userSchema.plugin(uniqueValidator, { message: '{PATH} debe ser único' });
