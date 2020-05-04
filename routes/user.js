@@ -93,7 +93,7 @@ app.put('/:id', mdAutentication.verifyToken, (req, res) => {
 // ================================
 // Post User
 // ================================
-app.post('/', mdAutentication.verifyToken, (req, res) => {
+app.post('/', (req, res) => {
 
     var body = req.body;
 
