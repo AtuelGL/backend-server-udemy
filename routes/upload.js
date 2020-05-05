@@ -45,11 +45,12 @@ app.put('/:type/:id', (req, res, next) => {
     var file = req.files.img;
     var splitFile = file.name.split('.');
     var extensionFile = splitFile[splitFile.length - 1];
+    var extensionFileLower = extensionFile.toLowerCase();
 
     // Validation Extension File
     var validExtensions = ['png', 'gif', 'jpg', 'jpeg'];
 
-    if (validExtensions.indexOf(extensionFile) < 0) {
+    if (validExtensions.indexOf(extensionFileLower) < 0) {
         return res.status(400).json({
             ok: false,
             message: 'Extension de archivo no válida',
