@@ -27,3 +27,41 @@ exports.verifyToken = function(req, res, next) {
         // });
     });
 };
+
+
+// ================================
+// Verify Admin
+// ================================
+exports.verifyADMIN_ROLE = function(req, res, next) {
+
+    var user = req.user;
+
+    if (user.role === 'ADMIN_ROLE') {
+        next();
+    } else {
+        return res.status(401).json({
+            ok: false,
+            message: 'Token incorrecto',
+            errors: err
+        });
+    }
+};
+
+// ================================
+// Verify Admin or Same User
+// ================================
+exports.verifyADMIN_ROLE_or_SameUser = function(req, res, next) {
+
+    var user = req.user;
+    var id = req.params.id;
+
+    if (user.role === 'ADMIN_ROLE' || user._id === id) {
+        next();
+    } else {
+        return res.status(401).json({
+            ok: false,
+            message: 'Token incorrecto',
+            errors: err
+        });
+    }
+};

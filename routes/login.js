@@ -76,7 +76,8 @@ app.post('/google', async(req, res) => {
                     ok: true,
                     user: userDB,
                     token: token,
-                    id: userDB._id
+                    id: userDB._id,
+                    menu: getMenu(userDB.role)
                 });
             }
         } else {
@@ -96,7 +97,8 @@ app.post('/google', async(req, res) => {
                     ok: true,
                     user: userDB,
                     token: token,
-                    id: userDB._id
+                    id: userDB._id,
+                    menu: getMenu(userDB.role)
                 });
 
             });
@@ -154,10 +156,44 @@ app.post('/', (req, res) => {
             ok: true,
             user: userDB,
             token: token,
-            id: userDB._id
+            id: userDB._id,
+            menu: getMenu(userDB.role)
         });
     });
 });
+
+// ================================
+// Generated Menu
+// ================================
+
+function getMenu(ROLE) {
+    var menu = [{
+            title: 'Principal',
+            icon: 'mdi mdi-gauge',
+            submenu: [
+                { title: 'Dashboard', url: '/dashboard' },
+                { title: 'Progress', url: '/progress' },
+                { title: 'Gráficos', url: '/graficas1' },
+                { title: 'Promesas', url: '/promises' },
+                { title: 'RxJS', url: '/rxjs' },
+            ]
+        },
+        {
+            title: 'Mantenimiento',
+            icon: 'mdi mdi-folder-lock-open',
+            submenu: [
+                // { title: 'Usuarios', url: '/users' },
+                { title: 'Hospitales', url: '/hospitals' },
+                { title: 'Medicos', url: '/medics' },
+            ]
+        }
+    ];
+
+    if (ROLE === 'ADMIN_ROLE') {
+        menu[1].submenu.unshift({ title: 'Usuarios', url: '/users' });
+    }
+    return menu;
+}
 
 
 
